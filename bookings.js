@@ -31,3 +31,4 @@ async function leadBooking() {
     console.error(err);
   }
 }
+document.addEventListener("DOMContentLoaded", leadBooking);
