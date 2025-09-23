@@ -8,6 +8,10 @@ function searchnotfound() {
     </div>`;
 };
 
+function tripfound() {
+    
+}
+
 document.querySelector("#btn-search").addEventListener("click", function() {
     searchnotfound();
 });
