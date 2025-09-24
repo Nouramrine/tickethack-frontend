@@ -4,6 +4,18 @@ const removeButtons = document.querySelectorAll('.remove-btn');
 const cartBox = document.querySelector('.cart-box');
 // Sélectionner le span du total
 const totalSpan = document.querySelector('.cart-footer span');
+// Sélectionner le footer
+const cartFooter = document.querySelector('.cart-footer');
+// Sélectionner le bloc empty
+const emptyCart = document.getElementById('cart-empty');
+
+   if (cartItems.length === 0) {
+        cartFooter.style.display = "none";
+        emptyCart.style.display = "block";
+    } else {
+        cartFooter.style.display = "flex";
+        emptyCart.style.display = "none";
+}
 
 // Fonction pour recalculer le total
 function updateTotal() {
@@ -15,7 +27,8 @@ function updateTotal() {
         total += price;
     });
     totalSpan.textContent = `Total : ${total}€`;
-}
+
+} 
 
 // Ajouter l'événement "click" à chaque bouton "remove"
 removeButtons.forEach(button => {
