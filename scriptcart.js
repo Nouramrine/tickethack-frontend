@@ -100,11 +100,11 @@ function renderCart(cartItems) {
     total += items.price;
     itemsHTML += `
     <div class="cart-item" data-id="${items.id}">
-//         <span>${items.departure} &gt; ${items.arrival}</span>
-//         <span>${items.hour}</span>
-//         <span>${items.price}€</span>
-//         <button class="remove-btn">X</button>
-//       </div>
+         <div class="cart-data">${items.departure} &gt; ${items.arrival}</div class="cart-data">
+         <div class="cart-data">${items.hour}</div class="cart-data">
+         <div class="cart-data">${items.price}€</div class="cart-data">
+         <button class="remove-btn">X</button>
+       </div>
     `;
 
     setupCart();
