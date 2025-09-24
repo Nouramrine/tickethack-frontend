@@ -17,11 +17,11 @@ async function leadBooking() {
       .map(
         (b) =>
           `<div class="booking-card">
-            <strong>${b.departure} ➝ ${b.arrival}</strong><br>
-            Departure: ${b.date}<br>
-            Price: ${b.price} €<br>
-            Time remaining: ${b.waitingTime}
-            </div>`
+        <div class="booking-left">${b.departure} > ${b.arrival}</div>
+        <div class="booking-time">${b.date}</div>
+        <div class="booking-price">${b.price} €</div>
+        <div class="booking-right">Departure in ${b.waitingTime}</div>
+      </div>`
       )
       .join("");
 
