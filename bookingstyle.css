@@ -1,9 +1,16 @@
 /* style.css */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #e8eceb;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #f3f6f6;
   margin: 0;
   padding: 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh-60px);
 }
 
 header {
@@ -42,18 +49,24 @@ header {
 }
 
 #bookings-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 60px);
-  padding: 20px;
+  background: white;
+  padding: 40px 60px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#bookings-container p {
+  margin: 10px 0;
+  color: #333;
+  font-size: 16px;
 }
 
 .booking-card {
   background: white;
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
   width: 400px;
   text-align: center;
   line-height: 1.5;
