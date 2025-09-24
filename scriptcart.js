@@ -40,7 +40,7 @@ const emptyCart = document.getElementById('cart-empty');
   `;
 
 
-// Gestion suppression
+// Gestion suppression d'un ticket
   const removeButtons = document.querySelectorAll(".remove-btn");
   removeButtons.forEach(button => {
     button.addEventListener("click", () => {
@@ -50,7 +50,7 @@ const emptyCart = document.getElementById('cart-empty');
     });
   });
 
-  // Gestion achat
+  // Function purcharse d'un ticket
   const purchaseButton = document.querySelector(".purchase-btn");
   purchaseButton.addEventListener("click", () => {
     alert("Merci pour votre achat !");
