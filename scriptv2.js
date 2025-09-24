@@ -1,14 +1,10 @@
 function searchNotFound() {
-  const mainMiddle = document.querySelector(".main-middle");
-  const oldBlock = document.querySelector(".search-rep");
-  if (oldBlock) oldBlock.remove();
-
-  mainMiddle.innerHTML += `
-    <div class="search-rep">
-        <img id="img-search" src="/frontend/images/notfound.png" alt="train logo"/>
-        <br>
-        <p>No trip found.</p>
-    </div>`;
+  const resultsBlock = document.querySelector(".search-rep");
+  resultsBlock.innerHTML = `
+    <img id="img-search" src="/frontend/images/notfound.png" alt="train logo"/>
+    <br>
+    <p>No trip found.</p>
+  `;
 }
 
 function tripFound() {
@@ -16,9 +12,12 @@ function tripFound() {
   const arrivalInput = document.getElementById("arrival").value.trim();
   const dateInput = document.getElementById("date").value;
 
-  const mainMiddle = document.querySelector(".main-middle");
-  const oldBlock = document.querySelector(".search-rep");
-  if (oldBlock) oldBlock.remove();
+  if (!departureInput || !arrivalInput) {
+    searchNotFound();
+    return;
+  }
+
+  const resultsBlock = document.querySelector(".search-rep");
 
   let url = `http://localhost:3000/trips?departure=${departureInput}&arrival=${arrivalInput}`;
   if (dateInput) url += `&date=${dateInput}`;
@@ -26,26 +25,27 @@ function tripFound() {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      const trips = data.filter(
-        (city) =>
-          city.departure.toLowerCase() === departureInput.toLowerCase() &&
-          city.arrival.toLowerCase() === arrivalInput.toLowerCase() &&
-          (!dateInput || city.date.slice(0, 10) === dateInput)
-      );
-      const resultsHTML = trips
+      if (!data || data.length === 0) {
+        searchNotFound();
+        return;
+      }
+
+      const resultsHTML = data
         .map((city) => {
-          const time = new Date(city.date).toLocaleString([], {
+          const time = new Date(city.date).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           });
-          return `<div class="trip-result">
-            <p>${city.departure} > ${city.arrival} | ${time} | ${city.price}€</p>
-            <button class="btn-book" data-id="${city._id}">Book</button>
-        </div>`;
+          return `
+            <div class="trip-result">
+              <p>${city.departure} > ${city.arrival} | ${time} | ${city.price}€</p>
+              <button class="btn-book" data-id="${city._id}">Book</button>
+            </div>
+          `;
         })
         .join("");
 
-      mainMiddle.innerHTML = `<div class="search-rep">${resultsHTML}</div>`;
+      resultsBlock.innerHTML = resultsHTML;
 
       document.querySelectorAll(".btn-book").forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -67,3 +67,5 @@ function tripFound() {
       searchNotFound();
     });
 }
+
+document.getElementById("btn-search").addEventListener("click", tripFound);
